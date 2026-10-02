@@ -1,1 +1,70 @@
 @import "tailwindcss";
+
+/* Dark mode is driven by data-theme="dark" on <html>, not by OS setting */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Light theme (default) */
+:root {
+  --bg: #ffffff;
+  --surface: #f5f6fb;
+  --fg: #0f1b3d;
+  --muted: #5b6480;
+  --border: #e3e6ef;
+  --brand: #14285c;
+  --brand-fg: #ffffff;
+  --accent: #f5b700;
+  --accent-fg: #0f1b3d;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg: #0b1226;
+  --surface: #131c38;
+  --fg: #eef1fa;
+  --muted: #a3acc8;
+  --border: #243055;
+  --brand: #3b55b8;
+  --brand-fg: #ffffff;
+  --accent: #f5b700;
+  --accent-fg: #0f1b3d;
+}
+
+/* Expose the variables as Tailwind utilities: bg-bg, bg-surface, text-fg, ... */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-fg: var(--brand-fg);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+  }
+}
+
+/* Accessibility: respect users who turn off motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

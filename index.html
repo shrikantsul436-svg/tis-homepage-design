@@ -2,9 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>tis-homepage-redesign</title>
+
+    <!-- Apply saved theme before first paint to avoid a light/dark flash -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('tis-theme');
+          var dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.dataset.theme = saved || (dark ? 'dark' : 'light');
+        } catch (e) {}
+      })();
+    </script>
+
+    <title>Tulas International School | CBSE Boarding School in Dehradun</title>
+    <meta
+      name="description"
+      content="Tulas International School (TIS), a CBSE co-ed boarding and day school in Dehradun with a 22-acre campus, strong academics and 16+ sports."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>
